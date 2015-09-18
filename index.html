@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Test</title>
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="bower_components/animate.css/animate.min.css">
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<main class="container">
+		<div class="well">測試區塊</div>
+		<button type="button" class="btn btn-danger">測試</button>
+	</main>
+	<script>
+		var judge = function (func) {
+			var start = window.performance.now();
+			func.call();
+			var end = window.performance.now();
+			var time = end - start;
+			console.log(time);
+			// endCall();
+		};
+
+		var	normal = function () {
+			$(".well").addClass("animated bounce");
+			$(".well").removeClass("animated bounce");
+		};
+
+		var	cloneUse = function () {
+			var obj = $(".well").clone().addClass("animated bounce");
+			$(".well").remove();
+			obj.prependTo(".container");
+		}
+
+		$(function () {
+			$("button").click(function () {
+				judge(cloneUse);
+				judge(normal);
+			})
+		});
+	</script>
+</body>
+</html>
